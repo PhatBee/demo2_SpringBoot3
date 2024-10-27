@@ -7,16 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vn.phatbee.demo2_springboot3.entity.Category;
 import vn.phatbee.demo2_springboot3.models.CategoryModel;
 import vn.phatbee.demo2_springboot3.services.CategoryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -62,6 +60,28 @@ public class CategoryController {
         model.addAttribute("message", message);
 
         // Redirect về URL Controller
+        return new ModelAndView("forward:/admin/categories", model);
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(ModelMap model, @PathVariable("id") Long categoryId){
+        Optional<Category> optCategory = categoryService.findById(categoryId);
+        CategoryModel cateModel = new CategoryModel();
+
+        // Kiểm tra sự tồn tại của category
+        if(optCategory.isPresent()){
+            Category entity = optCategory.get();
+
+            // Copy từ entity sang Model
+            BeanUtils.copyProperties(entity, cateModel);
+            cateModel.setIsEdit(true);
+
+            // Đẩy dữ liệu ra view
+            model.addAttribute("category", cateModel);
+
+            return new ModelAndView("admin/category/add", model);
+        }
+        model.addAttribute("message", "Category not found");
         return new ModelAndView("forward:/admin/categories", model);
     }
 
