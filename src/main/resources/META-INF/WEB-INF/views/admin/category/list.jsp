@@ -2,7 +2,12 @@
 pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 
-<a href="/admin/categories/add">Add Category</a>
+<a href="/admin/categories/add">Add Category</a><br>
+
+<c:if test="${message!=null}">
+    ${message}
+</c:if>
+
 <table>
     <tr>
         <th>Stt</th>

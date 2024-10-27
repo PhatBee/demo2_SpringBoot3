@@ -1,6 +1,6 @@
-package vn.phatbee.demo2_springboot3.entity;
+package vn.phatbee.demo2_springboot3.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,20 +11,16 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-@Table(name="category")
-public class Category implements Serializable {
+public class CategoryModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "categoryid")
     private Long id;
-    @Column(name = "categoryname", columnDefinition = "nvarchar(50)")
     @NotEmpty(message = "Không được bỏ trống")
     private String name;
-    @Column(name="images", columnDefinition = "nvarchar(500)")
     private String images;
     private int status;
+
+    private Boolean isEdit = false;
 
 }
