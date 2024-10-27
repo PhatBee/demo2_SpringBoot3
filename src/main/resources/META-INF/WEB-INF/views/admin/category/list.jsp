@@ -8,7 +8,7 @@ pageEncoding="UTF-8" %>
     ${message}
 </c:if>
 
-<table>
+<table border="1" width="100%">
     <tr>
         <th>Stt</th>
         <th>Images</th>
@@ -24,7 +24,7 @@ pageEncoding="UTF-8" %>
             <td>${cate.name}</td>
             <td>${cate.status}</td>
             <td>
-                <a href="/admin/categories/edit/${cate.id}">Sửa</a>
+                <a href="/admin/categories/edit/${cate.id}">Sửa</a> |
                 <a href="/admin/categories/delete/${cate.id}">Xoá</a>
             </td>
         </tr>

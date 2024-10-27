@@ -85,4 +85,11 @@ public class CategoryController {
         return new ModelAndView("forward:/admin/categories", model);
     }
 
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(ModelMap model,  @PathVariable("id") Long categoryId){
+        categoryService.deleteById(categoryId);
+        model.addAttribute("message", "Category deleted successfully");
+        return new ModelAndView("forward:/admin/categories");
+    }
+
 }
